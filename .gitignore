@@ -1,6 +1,9 @@
 # ignore jupyter notebook shadow files
 notebooks/.ipynb_checkpoints/
 
+# ignore pycache
+src/__pycache__/
+
 # Built application files
 *.apk
 *.aar
