@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 import datetime as dt
 from TrendClass import CleanData
-from TrendClass import TagsResearch
+from TagClass import TagsResearch
 
 if __name__ == '__main__':
 # filepath variables
@@ -29,4 +29,10 @@ if __name__ == '__main__':
     # print(df_us["post_time"].dtype)
 # groupby video_id, select columns, make df copy
     df_us_vid = CleanData.unique_reduce(df_us)
-    print(df_us_vid.columns)
+    # print(df_us_vid.columns)
+# Tags formatting and splitting
+    TagsResearch.tags_count(df_us_vid)
+    # print(df_us_vid.info())
+    xlsx_columns = ['title', 'channel_title', 'category_name', 'tags',
+                 'views', 'views_initial', 'tags_count']
+    df_us_vid.to_excel("../data/trends/USvideos_tags.xlsx", columns=xlsx_columns)

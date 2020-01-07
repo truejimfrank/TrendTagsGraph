@@ -57,12 +57,3 @@ class CleanData(object):
         return df[col_sel].groupby(['video_id']).max().copy()
 
 
-class TagsResearch(object):
-    ''' Tag formatting and synthesizing data from the tags column.
-    '''
-    def split_tags(self, tags_str):
-        return tags_str.replace('"', '').split('|')
-
-    def tags_format(self):
-    # transform text string into pd series
-        pass
