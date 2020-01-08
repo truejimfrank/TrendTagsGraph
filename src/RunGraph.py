@@ -31,7 +31,7 @@ def word_cloud_image(big_string, file_path):
 
 def image_histogram(hist_data, file_path, x_label, y_label):
     fig, ax = plt.subplots()
-    sns.distplot(hist_data, kde=False, rug=False, hist_kws={'alpha': 1})
+    sns.distplot(hist_data, kde=False, rug=False, hist_kws={'alpha': 1}, color='xkcd:dark purple')
     # sns.distplot(hist_data, hist_kws={'alpha': 1}, ax=ax)
     ax.set(xlabel=x_label, ylabel=y_label, xticks=range(0, 80, 10))
     plt.savefig(file_path)
@@ -75,6 +75,7 @@ if __name__ == '__main__':
     # cdf = df.groupby("channel_title").size().reset_index(name="video_count") \
     # .sort_values("video_count", ascending=False).head(20)
 # All tag words histogram 20
-    bar_20 = pd.Index(all_tags_list).value_counts().reset_index(name="tag_num").head(20)
-    image_barh(bar_20, "images/all_tags_hist_20.png", 
+    bar_20 = pd.Index(all_tags_list).value_counts().reset_index(name="tag_num").head(21)
+    image_barh(bar_20[bar_20['index'] != "[none]"], "images/all_tags_hist_20.png", 
             "Count of tag appearances", "Freq. of tag appearance")
+    
