@@ -1,11 +1,17 @@
 # A place to call on data and functions to get RESULTS!
 import pandas as pd
 import numpy as np
-from matplotlib import pyplot as plt
-import seaborn as sns
-import datetime as dt
+# from matplotlib import pyplot as plt
+# import seaborn as sns
 from TrendClass import CleanData
 from TagClass import TagsResearch
+
+def run_pipeline(df_csv, df_json):
+    CleanData.fill_nan(df_csv)
+    CleanData.join_categories(df_csv, df_json)
+    CleanData.date_format(df_csv)
+    df_vid = CleanData.unique_reduce(df_csv)
+    return TagsResearch.tags_count(df_vid)
 
 if __name__ == '__main__':
 # filepath variables
@@ -33,6 +39,6 @@ if __name__ == '__main__':
 # Tags formatting and splitting
     TagsResearch.tags_count(df_us_vid)
     # print(df_us_vid.info())
-    xlsx_columns = ['title', 'channel_title', 'category_name', 'tags',
-                 'views', 'views_initial', 'tags_count']
-    df_us_vid.to_excel("../data/trends/USvideos_tags.xlsx", columns=xlsx_columns)
+    # xlsx_columns = ['title', 'channel_title', 'category_name', 'tags', 'tags_count',
+    #              'views', 'views_initial']
+    # df_us_vid.to_excel("../data/trends/USvideos_tags.xlsx", columns=xlsx_columns)
