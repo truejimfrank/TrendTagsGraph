@@ -16,15 +16,15 @@ _YouTube trending video data from  [Kaggle: Trending YouTube Video Statistics](h
 
 ## Data Science Goals
 
-<b>QUESTION: </b> 
+<b>QUESTION:  </b> 
 Do topically selected subsets of the trending data have varying characteristics? Basic characteristics such as view count, likes, and tag count.
 
-<b>GOALS: </b> 
-    1. Extracting and manipulating the tags data with effective string processing
-    2. Find within the tags data specific groupings of tags that relate to a particular topic
-    3. Comparing video metadata across selected subsets of the dataset
+<b>GOALS:  </b> 
+1. Extracting and manipulating the tags data with effective string processing  
+2. Find within the tags data specific groupings of tags that relate to a particular topic  
+3. Comparing video metadata across selected subsets of the dataset  
 
-<b>WHY THIS SET OF GOALS?: </b> 
+<b>WHY THIS SET OF GOALS?:  </b> 
 How does one effectively and accurately find RELEVANT data hidden within the overwhelming deluge of information now available because of modern "BigData"? In this particular example, we are searching through tags data associated with YouTube. More broadly, it is hoped that the following data processing investigation gives a proper framework for seeking out the proverbial "needle in a haystack."
 
 ![needle in haystack](https://hackernoon.com/hn-images/0*3CWZPlNuPWUg5cgu)
@@ -50,10 +50,12 @@ Here's an example of the raw data used for this project:
 | puqaWrEC7tY | 17.14.11 | Nickelback Lyrics: Real or Fake? | Good Mythical Morning | 24 |
 | sbcbvuitiTc | 17.14.11 | Stephon Marbury and Jimmer Fredette fight in C... | NBA Highlights · YouTube | 17 |
 
+More of the relevant data fields:
+
 | tags | views | likes |  dislikes | comment_count |
 | --- | --- | --- | --- | --- |
-| rhett and link|"gmm"|"good mythical morning"|"... | 343168 | 10172 | 666 | 2146 |
-| NBA|"Basketball"|"Sports" | 956169 | 2017 | 2425 | 1447 |
+| `"rhett and link"|"gmm"|"good mythical morning"` | 343168 | 10172 | 666 | 2146 |
+| "NBA" "Basketball" "Sports" | 956169 | 2017 | 2425 | 1447 |
 
 
 ## EDA - (Exploratory Data Analysis)
