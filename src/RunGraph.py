@@ -39,12 +39,15 @@ def image_histogram(hist_data, file_path, x_label, y_label):
 def image_barh(bar_data, file_path, x_label, y_label):
     sel_palette = sns.cubehelix_palette(n_colors=20, start=2.1, reverse=True)
     fig, ax = plt.subplots()
-    # tags data
-    sns.barplot(x="tag_num", y="index", data=bar_data,
-                    palette=sel_palette)
-    # categories data
+    ## tags data
+    # sns.barplot(x="tag_num", y="index", data=bar_data,
+    #                 palette=sel_palette)
+    ## categories data
     # sns.barplot(x="category_name", y="index", data=bar_data,
     #                 palette=sel_palette)
+    ## categories sci_tech
+    sns.barplot(y="category_name", x="video_id", data=bar_data,
+                    palette=sel_palette)
     ax.set(xlabel=x_label, ylabel=y_label)
     ax.tick_params(labelsize=18)
     plt.tight_layout(pad=1.)
@@ -56,6 +59,10 @@ def word_cloud_topic(txt_pattern, file_path):
     tags_list = TagsResearch.create_tags_list(df_pat)
     tags_str = TagsResearch.create_str_from_list(tags_list)
     word_cloud_image(tags_str, file_path)
+
+def print_sel_shape(txt_pattern):
+    print('20 char of pattern = ' + txt_pattern[:20])
+    print(df.loc[df["tags"].str.contains(txt_pattern)].shape)
 
 if __name__ == '__main__':
 # filepath variables
@@ -69,12 +76,12 @@ if __name__ == '__main__':
     # df_us.to_pickle("../data/trends/USpipelined.pkl")
 # read pickle for faster graphing
     df = pd.read_pickle("../data/trends/USpipelined.pkl")
-    print(' --- dataframe columns and shape')
-    print(df.columns)
+    print(' --- dataframe info --- ')
+    # print(df.columns)
     print(df.shape)
 # wordcloud all tags image create
-    all_tags_list = TagsResearch.create_tags_list(df)
-    all_tags_str = TagsResearch.create_str_from_list(all_tags_list)
+    # all_tags_list = TagsResearch.create_tags_list(df)
+    # all_tags_str = TagsResearch.create_str_from_list(all_tags_list)
     # word_cloud_image(all_tags_str, "images/wc_all_standardstop.png")
 # Tag count per video histogram
     # image_histogram(df['tags_count'], "images/tag_count_hist.png", 
@@ -102,11 +109,29 @@ if __name__ == '__main__':
     # image_barh(bar_20[bar_20['index'] != "[none]"], "images/top20_education.png", 
     #         "Count of tag appearances", "Education Tags")
 # topically selected wordclouds
-    pat_house = 'house|home|apartment|condo|townehome|ranch|castle|real estate|property'
+    # txt patterns for selecting data subset
+    pat_sci_tech = 'science|technology'
     pat_airbnb = 'airbnb|hotel|hostel|motel|rental|vacation|tourist|travel|destination|passenger'
+    pat_house = 'house|home|apartment|condo|townehome|ranch|castle|real estate|property'
     pat_food = 'food|cook|kitchen|restaurant|breakfast|lunch|dinner|supper|hungry|tasty'
-    
-    
-    
-    word_cloud_topic(txt_pattern, file_path)
+    # printing pattern selection size, # of rows
+    print_sel_shape(pat_sci_tech)
+    print_sel_shape(pat_airbnb)
+    print_sel_shape(pat_house)
+    print_sel_shape(pat_food)
+    # wordcloud images
+    # word_cloud_topic(pat_sci_tech, "images/wc_pat_sci_tech.png")
+    # word_cloud_topic(pat_airbnb, "images/wc_pat_airbnb.png")
+    # word_cloud_topic(pat_house, "images/wc_pat_house.png")
+    # word_cloud_topic(pat_food, "images/wc_pat_food.png")
+# TAGS 'science|technology' top20
+    df_tags_scitech = df.loc[df["tags"].str.contains(pat_sci_tech)]
+    # tags_list_sci_tech = TagsResearch.create_tags_list(df_tags_scitech)
+    # bar_20 = pd.Index(tags_list_sci_tech).value_counts().reset_index(name="tag_num").head(20)
+    # image_barh(bar_20[bar_20['index'] != "[none]"], "images/top20_tags_sci_tech.png", 
+    #         "Count of tag appearances", "Tags")
+# Category counts from 'science|technology'
+    df_graph = df_tags_scitech.reset_index().groupby("category_name").count().reset_index().sort_values('video_id', ascending=False)
+    image_barh(df_graph, "images/cat_tags_sci_tech.png", 
+            "No. of videos", 'Tags "Science"|"Technology" Categories')
 

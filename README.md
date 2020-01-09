@@ -1,6 +1,6 @@
 # Trending YouTube Videos | "tags" MetaData Analysis
 
-A data science adventure by Jim Frank
+A data science adventure by Jim Frank  
 _YouTube trending video data from  [Kaggle: Trending YouTube Video Statistics](https://www.kaggle.com/datasnaek/youtube-new) ._
 
 ---
@@ -10,22 +10,21 @@ _YouTube trending video data from  [Kaggle: Trending YouTube Video Statistics](h
 2. [The Data](#the-data)
 3. [EDA - (Exploratory Data Analysis)](#eda-exploratory-data-analysis)
 4. [Data - Cleaning & Selection For Analysis](#data-cleaning--selection-for-analysis)
-5. [Let's Look At The Tag Data](#lets-look-at-tag-data)
+5. [Let's Look At The Tag Data](#lets-look-at-the-tag-data)
 6. [Conclusion](#conclusion)
 
+---
 
 ## Data Science Goals
 
 <b>QUESTION:  </b> 
-Do topically selected subsets of the trending data have varying characteristics? Basic characteristics such as view count, likes, and tag count.
-
-<b>GOALS:  </b> 
-1. Extracting and manipulating the tags data with effective string processing  
+Do topically selected subsets of the trending data have varying characteristics? Basic characteristics such as view count, likes, and tag count.# tags per video average
+    ve string processing  
 2. Find within the tags data specific groupings of tags that relate to a particular topic  
 3. Comparing video metadata across selected subsets of the dataset  
 
 <b>WHY THIS SET OF GOALS?:  </b> 
-How does one effectively and accurately find RELEVANT data hidden within the overwhelming deluge of information now available because of modern "BigData"? In this particular example, we are searching through tags data associated with YouTube. More broadly, it is hoped that the following data processing investigation gives a proper framework for seeking out the proverbial "needle in a haystack."
+How does one effectively and accurately find RELEVANT data hidden within the overwhelming deluge of information now available because of modern "BigData"? In this particular example, we are searching through tags data associated with YouTube. More broadly, it is hoped that this small-scale data investigation example gives a small glipse into how one might seek out the proverbial "needle in a haystack."
 
 ![needle in haystack](https://hackernoon.com/hn-images/0*3CWZPlNuPWUg5cgu)
 
@@ -60,25 +59,26 @@ More of the relevant data fields:
 
 ## EDA - (Exploratory Data Analysis)
 
-Videos appear multiple times. 6351 videos by unique video_id. 40949 data rows in the unfiltered data.
+40949 data rows in the unfiltered data. 
 
 View count range is surprisingly large 549 - 225,211,923
 
-6055 / 6351 unique tag data fields to unique videos
-
-spaghetti burrito|"diy burrito"|"spaghetti"|"burrito"|"burrito recipe"|"spaghetti deep fried"|"deep fried spaghetti"|"spgahetti sandwich"|"giant burrito"',
-       'numberphile|"prime numbers"|"proth prime"',
-       'Smart mug|"Heated thermos"|"tech"|"gift idea"|"unboxed"|"Ember mug"|"ember"|"Ember review"|"Heated mug"|"teardown"|"technology"|"Thermous"|"winter"|"holiday"|"christmas"|"gift"|"mug"|"unboxing"',
-       'auth-jvardon-auth',
-       'freaks and geeks|"jason segel"|"judd apatow"|"drums"|"rush"|"paul feig"|"drummer"|"nick andopolis"
-
 Viewcount is understandably corellated to likes (0.849), dislikes (0.472), and comment count (0.618)
+
+Videos appear multiple times. 6351 videos by unique video_id.
+
+<b>6055</b> unique tag data fields  
+<b>6351</b> unique videos  
+This much unique tag data gives great confidence in it being usable for topic selection & discovery.
 
 ## Data - Cleaning & Selection For Analysis
 
-dfsel = df.groupby(['video_id']).max().copy()
+dfsel = df.groupby(['video_id']).max()
 
-126,729 total tags from unique videos. 56,506 of these tags are unique.
+<b>126,729</b> total tags from unique videos  
+<b>56,506</b> of these tags are unique  
+<b>19.95</b> average tags per video  
+
 
 ## Let's Look At The Tag Data
 
@@ -98,6 +98,8 @@ dfsel = df.groupby(['video_id']).max().copy()
 
 <sub><b>Figure: </b> The 100 most used tags in the dataset. </sub>
 
+### Categories
+
 ![categories count](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/categories_count_crop.png)
 
 <sub><b>Figure: </b> The count of videos in each category. </sub>
@@ -110,7 +112,51 @@ dfsel = df.groupby(['video_id']).max().copy()
 
 <sub><b>Figure: </b> Top 20 tags in Education category. </sub>
 
-The tags "technology" and "science" are both stop results in each category.
+The tags "technology" and "science" are both top results in each category.
+
+### Topic Selection By Tags
+
+1st 20 char of pattern = science|technology
+(277, 14)
+4.4%
+
+![top20 tags sci tech](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/top20_tags_sci_tech.png)
+
+<sub><b>Figure: </b> Top 20 tags selected by "science"|"technology". </sub>
+
+![tags sci tech categories](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/cat_tags_sci_tech.png)
+
+<sub><b>Figure: </b> Categories selected by "science"|"technology". </sub>
+
+![tags sci tech wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_sci_tech_r.png)
+
+<sub><b>Figure: </b> "Science" | "Technology" WordCloud </sub>
+
+### Other Topics Selected By Tags
+
+1st 20 char of pattern = airbnb|hotel|hostel|
+(106, 14)
+1.7%
+
+![tags airbnb wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_airbnb_r.png)
+
+<sub><b>Figure: </b> airbnb | hotel | travel WordCloud </sub>
+
+1st 20 char of pattern = house|home|apartment
+(332, 14)
+5.2%
+
+![tags house wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_house_r.png)
+
+<sub><b>Figure: </b> house | home WordCloud </sub>
+
+1st 20 char of pattern = food|cook|kitchen|re
+(427, 14)
+6.7%
+
+![tags house wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_food_r.png)
+
+<sub><b>Figure: </b> food | cook | hungry WordCloud </sub>
 
 ## Conclusion
 
