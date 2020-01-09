@@ -8,9 +8,9 @@ _YouTube trending video data from  [Kaggle: Trending YouTube Video Statistics](h
 ## Table of Contents
 1. [Data Science Goals](#data-science-goals)
 2. [The Data](#the-data)
-3. [EDA - (Exploratory Data Analysis)](#eda-exploratory-data-analysis)
-4. [Data - Cleaning & Selection For Analysis](#data-cleaning--selection-for-analysis)
-5. [Let's Look At The Tag Data](#lets-look-at-the-tag-data)
+3. [EDA And Data Wrangling](#eda-and-data-wrangling)
+4. [Let's Visualize That Tag Data](#lets-visualize-that-tag-data)
+5. [Topic Selection By Tags](#topic-selection-by-tags)
 6. [Conclusion](#conclusion)
 
 ---
@@ -18,8 +18,10 @@ _YouTube trending video data from  [Kaggle: Trending YouTube Video Statistics](h
 ## Data Science Goals
 
 <b>QUESTION:  </b> 
-Do topically selected subsets of the trending data have varying characteristics? Basic characteristics such as view count, likes, and tag count.# tags per video average
-    ve string processing  
+Do topically selected subsets of the trending data have varying characteristics? Basic characteristics such as view count, likes, and tag count.  
+
+<b>GOALS:  </b> 
+1. Extracting and manipulating the tags data with effective string processing
 2. Find within the tags data specific groupings of tags that relate to a particular topic  
 3. Comparing video metadata across selected subsets of the dataset  
 
@@ -37,9 +39,6 @@ YouTube (the world-famous video sharing website) maintains a list of the top tre
 ### Content
 
 This dataset includes several months of data on daily trending YouTube videos.  
-11/14/2017 is the earliest trending day.  
-6/14/2018 is the latest trending day.  
-This is a period of 7 months.  
 Unless otherwise stated, information presented here will be from the USA data subset. Data files from a variety of countries are available on the Kaggle project website.
 
 Here's an example of the raw data used for this project:
@@ -57,30 +56,36 @@ More of the relevant data fields:
 | "NBA" "Basketball" "Sports" | 956169 | 2017 | 2425 | 1447 |
 
 
-## EDA - (Exploratory Data Analysis)
+## EDA And Data Wrangling
 
-40949 data rows in the unfiltered data. 
+<b>40949</b> data rows in the unfiltered data.  
+<b>11/14/2017</b> is the earliest trending day.  
+<b>6/14/2018</b> is the latest trending day.  
+This is a period of 7 months.  
+View count range is surprisingly large 549 - 225,211,923 views  
+Viewcount is understandably corellated to:  
+likes (0.849), dislikes (0.472), & comment count (0.618)  
 
-View count range is surprisingly large 549 - 225,211,923
-
-Viewcount is understandably corellated to likes (0.849), dislikes (0.472), and comment count (0.618)
-
-Videos appear multiple times. 6351 videos by unique video_id.
-
+Videos appear multiple times in the 40949 rows of data.  
+### <b>6351</b> videos by unique video_id  
 <b>6055</b> unique tag data fields  
-<b>6351</b> unique videos  
-This much unique tag data gives great confidence in it being usable for topic selection & discovery.
+This much unique tag data gives confidence in its usability for topic selection & discovery.
 
-## Data - Cleaning & Selection For Analysis
+![youtube vid image](https://i.ytimg.com/vi/VYOjWnS4cMY/maxresdefault.jpg)
 
-dfsel = df.groupby(['video_id']).max()
+<sub><b>Figure: </b> Thumbnail for top viewed video in the dataset. Donald Glover is excited for some data science. How about you? </sub>
+
+### Cleaning And Selection For Analysis
+
+A main goal of the data pipeline would be to reduce the dataset down to rows associated with each unique video. This was done by selecting the most recent or max value for fields that varied over time. Fields such as "trending_date" and "views".
+
+Tags data for each video was stored as one long string. Pandas string methods were used to clean this datafield for counting and graphing. Additional insights are possible after cleaning the tags data.
 
 <b>126,729</b> total tags from unique videos  
 <b>56,506</b> of these tags are unique  
 <b>19.95</b> average tags per video  
 
-
-## Let's Look At The Tag Data
+## Let's Visualize That Tag Data
 
 ![tag count histogram](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/tag_count_hist.png)
 
@@ -112,13 +117,19 @@ dfsel = df.groupby(['video_id']).max()
 
 <sub><b>Figure: </b> Top 20 tags in Education category. </sub>
 
-The tags "technology" and "science" are both top results in each category.
+The tags "technology" and "science" are both top results in the preceding two categories.
 
-### Topic Selection By Tags
+## Topic Selection By Tags
 
-1st 20 char of pattern = science|technology
-(277, 14)
-4.4%
+Now lets filter by tags to see what sort of videos come up.  
+First we'll search tags by:  
+<b>"science" or "technology"  </b>
+(alternate notation: "science"|"technology" )  
+
+277 videos are returned by this search  
+4.4% of videos in the dataset  
+
+So what are these videos? Let's explore by looking at the complete tag set from the search.
 
 ![top20 tags sci tech](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/top20_tags_sci_tech.png)
 
@@ -130,33 +141,40 @@ The tags "technology" and "science" are both top results in each category.
 
 ![tags sci tech wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_sci_tech_r.png)
 
-<sub><b>Figure: </b> "Science" | "Technology" WordCloud </sub>
+<sub><b>Figure: </b> "science"|"technology" WordCloud </sub>
 
 ### Other Topics Selected By Tags
 
-1st 20 char of pattern = airbnb|hotel|hostel|
-(106, 14)
-1.7%
+Now that a tool is built, what would you like to learn? With 56,506 unique tags, there are all sorts of things we could investigate.  
+Here is a set of search terms associated with <b>hotels and travel</b>.  
+'airbnb|hotel|hostel|motel|rental|vacation|tourist|travel|destination|passenger'
+
+106 videos are returned by this search  
+1.7% of videos in the dataset  
 
 ![tags airbnb wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_airbnb_r.png)
 
-<sub><b>Figure: </b> airbnb | hotel | travel WordCloud </sub>
+<sub><b>Figure: </b> hotels and travel WordCloud </sub>
 
-1st 20 char of pattern = house|home|apartment
-(332, 14)
-5.2%
+<b>Home and real estate</b> search terms  
+'house|home|apartment|condo|townehome|ranch|castle|real estate|property'
+
+332 videos are returned by this search  
+5.2% of videos in the dataset  
 
 ![tags house wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_house_r.png)
 
-<sub><b>Figure: </b> house | home WordCloud </sub>
+<sub><b>Figure: </b> Home and real estate WordCloud </sub>
 
-1st 20 char of pattern = food|cook|kitchen|re
-(427, 14)
-6.7%
+<b>Food and cooking</b> search terms  
+'food|cook|kitchen|restaurant|breakfast|lunch|dinner|supper|hungry|tasty'
+
+427 videos are returned by this search  
+6.7% of videos in the dataset  
 
 ![tags house wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_food_r.png)
 
-<sub><b>Figure: </b> food | cook | hungry WordCloud </sub>
+<sub><b>Figure: </b> Food and cooking WordCloud </sub>
 
 ## Conclusion
 

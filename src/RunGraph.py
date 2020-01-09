@@ -131,7 +131,7 @@ if __name__ == '__main__':
     # image_barh(bar_20[bar_20['index'] != "[none]"], "images/top20_tags_sci_tech.png", 
     #         "Count of tag appearances", "Tags")
 # Category counts from 'science|technology'
-    df_graph = df_tags_scitech.reset_index().groupby("category_name").count().reset_index().sort_values('video_id', ascending=False)
-    image_barh(df_graph, "images/cat_tags_sci_tech.png", 
-            "No. of videos", 'Tags "Science"|"Technology" Categories')
+    # df_graph = df_tags_scitech.reset_index().groupby("category_name").count().reset_index().sort_values('video_id', ascending=False)
+    # image_barh(df_graph, "images/cat_tags_sci_tech.png", 
+    #         "No. of videos", 'Tags "Science"|"Technology" Categories')
 
