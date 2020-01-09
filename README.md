@@ -54,7 +54,7 @@ More of the relevant data fields:
 
 | tags | views | likes |  dislikes | comment_count |
 | --- | --- | --- | --- | --- |
-| `"rhett and link"|"gmm"|"good mythical morning"` | 343168 | 10172 | 666 | 2146 |
+| "rhett and link" "gmm" "good mythical morning" | 343168 | 10172 | 666 | 2146 |
 | "NBA" "Basketball" "Sports" | 956169 | 2017 | 2425 | 1447 |
 
 
@@ -90,13 +90,27 @@ dfsel = df.groupby(['video_id']).max().copy()
 
 <sub><b>Figure: </b> WordCloud of all words contained in tags for the dataset. (A generic stopwords list has been used.) </sub>
 
-![bar20 all tags](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/all_tags_hist_20_crop.png)
+![bar20 all tags](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/all_tags_hist_20.png)
 
 <sub><b>Figure: </b> Shows the 20 most used tags in the dataset. </sub>
 
 ![bar100 all tags](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/all_tags_hist_100_crop.png)
 
 <sub><b>Figure: </b> The 100 most used tags in the dataset. </sub>
+
+![categories count](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/categories_count_crop.png)
+
+<sub><b>Figure: </b> The count of videos in each category. </sub>
+
+![top20 sci tech](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/top20_sci_tech.png)
+
+<sub><b>Figure: </b> Top 20 tags in Science & Technology category. </sub>
+
+![top20 education](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/top20_education.png)
+
+<sub><b>Figure: </b> Top 20 tags in Education category. </sub>
+
+The tags "technology" and "science" are both stop results in each category.
 
 ## Conclusion
 
