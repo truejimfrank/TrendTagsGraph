@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 # from matplotlib import pyplot as plt
 # import seaborn as sns
-import datetime as dt
+# import datetime as dt
 
 class TagsResearch(object):
     ''' Tag formatting and synthesizing data from the tags column.
@@ -14,7 +14,6 @@ class TagsResearch(object):
         return df
 
     def create_tags_list(df):
-    # transform tags column into all tags df
         tags_series = pd.Series(df['tags'].str.replace('"', '').str.split('|'))
         flatten_matrix = [val for sublist in tags_series for val in sublist]
         return flatten_matrix

@@ -39,6 +39,6 @@ if __name__ == '__main__':
 # Tags formatting and splitting
     TagsResearch.tags_count(df_us_vid)
     # print(df_us_vid.info())
-    # xlsx_columns = ['title', 'channel_title', 'category_name', 'tags', 'tags_count',
+    # x_columns = ['title', 'channel_title', 'category_name', 'tags', 'tags_count',
     #              'views', 'views_initial']
-    # df_us_vid.to_excel("../data/trends/USvideos_tags.xlsx", columns=xlsx_columns)
+    # df_us_vid.to_excel("../data/trends/USvideos_tags.xlsx", columns=x_columns)

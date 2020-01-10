@@ -11,7 +11,7 @@ class CleanData(object):
     # def __init__(self):
     #     pass
 
-    # This didn't work as intended
+    # didn't work this way
     # def load_csv(self, file_path):
     #     return pd.read_csv(file_path)
 
