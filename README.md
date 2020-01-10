@@ -22,7 +22,7 @@ Do topically selected subsets of the trending data have varying characteristics?
 
 <b>GOALS:  </b> 
 1. Extracting and manipulating the tags data with effective string processing
-2. Find within the tags data specific groupings of tags that relate to a particular topic  
+2. Find specific groupings within the tags data that relate to a particular topic  
 3. Comparing video metadata across selected subsets of the dataset  
 
 <b>WHY THIS SET OF GOALS?:  </b> 
@@ -58,17 +58,17 @@ More of the relevant data fields:
 
 ## EDA And Data Wrangling
 
-<b>40949</b> data rows in the unfiltered data.  
-<b>11/14/2017</b> is the earliest trending day.  
-<b>6/14/2018</b> is the latest trending day.  
-This is a period of 7 months.  
-View count range is surprisingly large 549 - 225,211,923 views  
-Viewcount is understandably corellated to:  
-likes (0.849), dislikes (0.472), & comment count (0.618)  
+* <b>40,949</b> data rows in the unfiltered data.  
+* <b>11/14/2017</b> is the earliest trending day.  
+* <b>6/14/2018</b> is the latest trending day.  
+* This is a period of 7 months.  
+* View count range is surprisingly large 549 - 225,211,923 views  
+* Viewcount is understandably corellated to:  
+    likes (0.849), dislikes (0.472), & comment count (0.618)  
 
 Videos appear multiple times in the 40949 rows of data.  
-### <b>6351</b> videos by unique video_id  
-<b>6055</b> unique tag data fields  
+### <b>6,351</b> videos by unique video_id  
+### <b>6,055</b> unique tag data fields  
 This much unique tag data gives confidence in its usability for topic selection & discovery.
 
 ![youtube vid image](https://i.ytimg.com/vi/VYOjWnS4cMY/maxresdefault.jpg)
@@ -123,7 +123,7 @@ The tags "technology" and "science" are both top results in the preceding two ca
 
 Now lets filter by tags to see what sort of videos come up.  
 First we'll search tags by:  
-<b>"science" or "technology"  </b>
+<b>"science" or "technology"  </b>  
 (alternate notation: "science"|"technology" )  
 
 277 videos are returned by this search  
@@ -145,7 +145,8 @@ So what are these videos? Let's explore by looking at the complete tag set from 
 
 ### Other Topics Selected By Tags
 
-Now that a tool is built, what would you like to learn? With 56,506 unique tags, there are all sorts of things we could investigate.  
+Now that a tool is built, what would you like to learn?  
+With 56,506 unique tags, there are all sorts of things we could investigate.  
 Here is a set of search terms associated with <b>hotels and travel</b>.  
 'airbnb|hotel|hostel|motel|rental|vacation|tourist|travel|destination|passenger'
 
@@ -161,6 +162,7 @@ Here is a set of search terms associated with <b>hotels and travel</b>.
 
 332 videos are returned by this search  
 5.2% of videos in the dataset  
+"Recipe" and "cooking" have appeared in the WordCloud.
 
 ![tags house wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_house_r.png)
 
@@ -171,6 +173,7 @@ Here is a set of search terms associated with <b>hotels and travel</b>.
 
 427 videos are returned by this search  
 6.7% of videos in the dataset  
+"Recipe" also appears in this visualization despite not being in the search terms.
 
 ![tags house wordcloud](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/wc_pat_food_r.png)
 
@@ -178,4 +181,25 @@ Here is a set of search terms associated with <b>hotels and travel</b>.
 
 ## Conclusion
 
+![comparison means](https://github.com/truejimfrank/TrendTagsGraph/blob/master/images/comp_means_dist.png)
 
+<sub><b>Figure: </b> Comparing viewcount means from several data subsets </sub>
+
+Going by the "eyeball test", there does appear to be differences in the mean values between topically selected subsets.
+
+What were our goals again?  
+<b>GOALS:  </b> 
+1. Extracting and manipulating the tags data with effective string processing
+2. Find specific groupings within the tags data that relate to a particular topic  
+3. Comparing video metadata across selected subsets of the dataset  
+
+### Final Thoughts
+
+* The tags data proved to be full of interesting connections and associations.  
+* It felt somewhat safe to assume the categories datafield would have some overlap with tags data. This appears to be the case.  
+* When you dig a hole looking for one category of data, you end up with data treasure you didn't even know was there.  
+
+![treasure](http://pagosasprings.com/wp-content/uploads/2013/04/gold.jpg)
+
+http://pagosasprings.com/wp-content/uploads/2013/04/gold.jpg
+<sub><b>Figure: </b> Buried Treasure </sub>

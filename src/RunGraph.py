@@ -32,7 +32,6 @@ def word_cloud_image(big_string, file_path):
 def image_histogram(hist_data, file_path, x_label, y_label):
     fig, ax = plt.subplots()
     sns.distplot(hist_data, kde=False, rug=False, hist_kws={'alpha': 0.7}, color='xkcd:dark teal')
-    # sns.distplot(hist_data, hist_kws={'alpha': 1}, ax=ax)
     ax.set(xlabel=x_label, ylabel=y_label, xticks=range(0, 80, 10))
     plt.savefig(file_path)
 
@@ -126,6 +125,7 @@ if __name__ == '__main__':
     # word_cloud_topic(pat_food, "images/wc_pat_food.png")
 # TAGS 'science|technology' top20
     df_tags_scitech = df.loc[df["tags"].str.contains(pat_sci_tech)]
+    df_tags_hotel = df.loc[df["tags"].str.contains(pat_airbnb)]
     # tags_list_sci_tech = TagsResearch.create_tags_list(df_tags_scitech)
     # bar_20 = pd.Index(tags_list_sci_tech).value_counts().reset_index(name="tag_num").head(20)
     # image_barh(bar_20[bar_20['index'] != "[none]"], "images/top20_tags_sci_tech.png", 
@@ -134,4 +134,14 @@ if __name__ == '__main__':
     # df_graph = df_tags_scitech.reset_index().groupby("category_name").count().reset_index().sort_values('video_id', ascending=False)
     # image_barh(df_graph, "images/cat_tags_sci_tech.png", 
     #         "No. of videos", 'Tags "Science"|"Technology" Categories')
-
+# views comparison hist (BROKEN)
+    numbins = 1000
+    fig, ax = plt.subplots()
+    # sns.distplot(df['views'], kde=True, rug=False, hist_kws={'alpha': 0.33}, color='xkcd:dark teal')
+    sns.distplot(df_tags_scitech['views'], kde=True, rug=False, hist_kws={'alpha': 0.33}, color='xkcd:dark green')
+    sns.distplot(df_tags_hotel['views'], kde=True, rug=False, hist_kws={'alpha': 0.33}, color='xkcd:dark red')
+    ax.set(xlabel='Views', ylabel='No. of videos')
+    ax.set_xlim(0,500000.)
+    ax.set_ylim(0,200.)
+    # ax.set(xlabel=x_label, ylabel=y_label, xticks=range(0, 80, 10))
+    plt.savefig("images/comp_views_hist.png")
