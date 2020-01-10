@@ -201,5 +201,4 @@ What were our goals again?
 
 ![treasure](http://pagosasprings.com/wp-content/uploads/2013/04/gold.jpg)
 
-http://pagosasprings.com/wp-content/uploads/2013/04/gold.jpg
 <sub><b>Figure: </b> Buried Treasure </sub>
