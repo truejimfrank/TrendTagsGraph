@@ -8,7 +8,7 @@ def y_axis_func(x, vids_no, mean_v, dev_v):
     return scs.norm.pdf(x, loc=mean_v, scale=dev_v) * scaling
 
 if __name__ == '__main__':
-    plt.rc('figure', figsize=(10, 8), dpi=100)
+    plt.rc('figure', figsize=(7, 6), dpi=100)
     plt.rc('axes', labelpad=18, facecolor="#ffffff", linewidth=0.4, grid=False, labelsize=24)
     fig, ax = plt.subplots()
     x = np.linspace(0, 3.5e6, 200)
@@ -35,7 +35,7 @@ if __name__ == '__main__':
     ax.axvline(views_sci, color='xkcd:plum', alpha=0.6)
     ax.axvline(views_hotel, color='xkcd:magenta', alpha=0.6)
     ax.set(xlabel='Views')
-    ax.tick_params(labelsize=16)
+    ax.tick_params(labelsize=12)
     ax.set_ylim(0, 8500.)
     plt.yticks([])
     plt.legend(fontsize='x-large')
